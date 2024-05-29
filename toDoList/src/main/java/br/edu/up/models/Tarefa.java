@@ -1,8 +1,9 @@
 package br.edu.up.models;
 
+import java.util.TreeMap;
 import java.util.UUID;
 
-public class Tarefa {
+public class Tarefa implements Escrita {
     private UUID uuid;
     private String titulo;
     private String descricao;
@@ -61,8 +62,25 @@ public class Tarefa {
         this.usuario = usuario;
     }
 
+    public void atualizarDados(Tarefa tarefa){
+        this.titulo = tarefa.getTitulo();
+        this.descricao = tarefa.getDescricao();
+        this.prioridade = tarefa.getPrioridade();
+        this.usuario = tarefa.getUsuario();
+    }
     @Override
     public String toString() {
+        return "Tarefa{" +
+                "uuid=" + uuid +
+                ", titulo='" + titulo + '\'' +
+                ", descricao='" + descricao + '\'' +
+                ", prioridade='" + prioridade + '\'' +
+                ", usuario=" + usuario +
+                '}';
+    }
+
+    @Override
+    public String dadosFormatados() {
         return "Tarefa{" +
                 "uuid=" + uuid +
                 ", titulo='" + titulo + '\'' +

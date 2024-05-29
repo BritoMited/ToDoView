@@ -42,6 +42,9 @@ public class ToDoView {
             case 1:
                 cadastrar(sc);
                 break;
+            case 2:
+                cadastrar(sc);
+                break;
             case 99:
                 System.out.println("ta de sacanagem né ");
                 break;
@@ -84,8 +87,34 @@ public class ToDoView {
         }
     }
 
-    private static void atualizar(){
+    private static void atualizar(Scanner sc, Tarefa tarefa){
+        try {
+            System.out.println("Informe o Titulo: ");
+            var titulo = sc.nextLine();
 
+            System.out.println("Informe o Descrição: ");
+            var descricao = sc.nextLine();
+
+            System.out.println("Informe o Prioridade: ");
+            var prioridade = sc.nextLine();
+
+
+            UsuarioView.exibirDadosDoUsuario();
+            System.out.println("Informe o Usuario por UUID: ");
+            var uuid = sc.nextLine();
+
+            //BUSCANDO DADOS DO USU
+            var usuario = UsuarioController.buscarUsuarioForUUID(UUID.fromString(uuid));
+
+            //CRIANDO OBJ TAREFA
+            Tarefa t = new Tarefa(titulo, descricao, prioridade, usuario);
+
+            tarefa.atualizarDados(t);
+
+            TarefaController.cadastrar(t);
+        }catch (Exception e){
+            logger.error("erro ao criar tarefa");
+        }
     }
 
     private static void remover(){
